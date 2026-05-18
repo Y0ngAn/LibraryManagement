@@ -1,3 +1,4 @@
+// book 클래스
 public class Book {
     private int id;
     private String title;

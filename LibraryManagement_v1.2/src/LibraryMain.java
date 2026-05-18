@@ -3,10 +3,9 @@ import java.util.*;
 /**
  * 도서 관리 시스템의 메인 클래스
  * <p>사용자 인터페이스(CLI)를 제공하며, DB 연결하여 권한에 따른 메뉴 출력 및 사용자 입력을 처리합니다.</p>
- <p>26년5월13일 수정<p>
+ <p>26년5월18일 시작<p/>
  *
- *
- * @author Su Man Nam
+ * @author JaeYong
  * @version 1.2
  */
 public class LibraryMain {
