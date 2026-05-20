@@ -84,6 +84,7 @@ public class LibraryManager {
 
     /**
      * 도서를 시스템에서 삭제합니다.
+     * <p>삭제하는 메서드 호출 추가-Ref: Github issue 1 (26.05.20; 안재용)</p>
      * @param id 삭제할 도서 ID
      * @return 삭제 성공 여부
      */
