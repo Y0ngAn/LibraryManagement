@@ -154,6 +154,6 @@ public class LibraryRepository {
         } catch (SQLException e) {
             // 예외 처리
         }
-    return null;
+    return null; //dev/github-issue-6
     }
 }
