@@ -135,25 +135,28 @@ public class LibraryRepository {
      * @see <a href="https://github.com/sumannam/Java/issues/40">Issue #40: SQL Injection 취약점 개발</a>
      */
     public User loadUser(String id, String pw) {
-        //String sql = "SELECT * FROM users WHERE user_id = ? AND password = ?";
         String sql = "SELECT user_id, type FROM users WHERE user_id = ? AND password = ?";
 
         try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) { // 1. SQL 뼈대 준비 및 컴파일
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            // 2. 파라미터 바인딩 (인덱스는 1부터 시작합니다)
-            pstmt.setString(1, id);
-            pstmt.setString(2, pw);
+            pstmt.setString(1, id.trim());
+            pstmt.setString(2, pw.trim());
 
-            // 3. 쿼리 실행
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    // 결과 처리
+                    User user = new User(
+                            rs.getString("user_id"),
+                            pw.trim(),
+                            rs.getString("type")
+                    );
+
+                    return user;
                 }
             }
         } catch (SQLException e) {
-            // 예외 처리
+            e.printStackTrace();
         }
-    return null; //dev/github-issue-6
+        return null;
     }
 }
