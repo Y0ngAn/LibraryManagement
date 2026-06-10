@@ -145,7 +145,6 @@ public class LibraryRepository {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-
                     User user = new User(
                             rs.getString("user_id"),
                             pw.trim(),
