@@ -136,28 +136,24 @@ public class LibraryRepository {
      */
     public User loadUser(String id, String pw) {
         //String sql = "SELECT * FROM users WHERE user_id = ? AND password = ?";
-        String sql = "SELECT * FROM users WHERE user_id = '" + id + "' AND password = '" + pw + "'";
-        //System.out.println(sql);
+        String sql = "SELECT user_id, type FROM users WHERE user_id = ? AND password = ?";
 
         try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) { // 1. SQL 뼈대 준비 및 컴파일
 
+            // 2. 파라미터 바인딩 (인덱스는 1부터 시작합니다)
             pstmt.setString(1, id);
             pstmt.setString(2, pw);
 
+            // 3. 쿼리 실행
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    // 반환 타입이 User로 바뀌었으므로 이제 에러 없이 정상 작동합니다.
-                    return new User(
-                            rs.getString("user_id"),
-                            rs.getString("password"),
-                            rs.getString("type")
-                    );
+                    // 결과 처리
                 }
             }
         } catch (SQLException e) {
-            System.err.println("[오류] 로그인 조회 실패: " + e.getMessage());
+            // 예외 처리
         }
-        return null; // 일치하는 사용자가 없을 때
+    return null; //dev/github-issue-6
     }
 }
